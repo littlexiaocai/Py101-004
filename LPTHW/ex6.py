@@ -2,12 +2,10 @@ x = "there are %d types of people" %10
 binary="binary"
 do_not="don't"
 y = "Those who know %s and those who %s" %(binary,do_not)
-
-z = "i said: %r "
 print x
 print y
 
-print z % x
+print"i said: %r" %x
 print"i also said: %r" %y
 
 hilarious = False
@@ -19,6 +17,3 @@ w = "this is the left side of..."
 e = "a string with a right side"
 
 print w+e
-
-print"i said: %r"%"there are %d types of people" %10
- 
