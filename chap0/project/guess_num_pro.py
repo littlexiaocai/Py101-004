@@ -46,7 +46,7 @@ def comparedigit(key,digits):
 i = 10
 
 key = gener_key() 
-print("答案是",key)
+#print("答案是",key)
 
 while True:
     num =input("请输入数字")
