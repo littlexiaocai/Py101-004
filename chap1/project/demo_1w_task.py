@@ -1,8 +1,15 @@
+'''
+输入城市名，返回该城市的天气数据；
+输入指令，打印帮助文档
+输入指令，退出程序的交互
+在退出程序之前，打印查询过的所有城市。
+'''
+
 def weather_dict_change():
     with open("weather_info.txt") as f:
         weather_dict = {}
         for line in f:
-            weather_dict[line.split(",")[0].strip('\n')] = line.strip('\n').split(",")[1]
+            weather_dict[line.split(",")[0]] = line.strip('\n').split(",")[1]
 
     #print (weather_dict)
 
