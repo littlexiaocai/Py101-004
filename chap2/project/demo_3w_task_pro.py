@@ -2,55 +2,27 @@ from apixu.client import ApixuClient, ApixuException
 api_key = 'bc640bce45574adfbe235846172308'
 client = ApixuClient(api_key)
 
-###########################
-# current weather
-###########################
-#current = client.getCurrentWeather(q='guangzhou')
-# "current" is a dict with a structure like this:
-"""
-{
-    'current': {
-        'cloud': 0,
-        'condition': {
-            'code': 1000,
-            'icon': 'http://www.apixu.com/static/weather/64x64/day/113.png',
-            'text': 'Sunny'
-        },
-        'feelslike_c': 24.6,
-        'feelslike_f': 76.2,
-        'humidity': 36,
-        'last_updated': '2015-06-29 13:30',
-        'last_updated_epoch': 1435584602,
-        'precip_in': 0.0,
-        'precip_mm': 0.0,
-        'pressure_in': 30.7,
-        'pressure_mb': 1022.0,
-        'temp_c': 24.0,
-        'temp_f': 75.2,
-        'wind_degree': 260,
-        'wind_dir': 'W',
-        'wind_kph': 19.1,
-        'wind_mph': 11.9
-    },
-    'location': {
-        'country': 'United Kingdom',
-        'lat': 51.52,
-        'localtime': '2015-06-29 13:50',
-        'localtime_epoch': 1435585840,
-        'lon': -0.11,
-        'name': 'London',
-        'region': 'City Of London, Greater London',
-        'tz_id': 'Europe/London'
-    }
-}
-"""
-#print (current['current']['temp_c'])  # show temprature in celsius
-#print (current['location']['country'])  # name of country
+def main():
 
-###########################
-# forecast weather
-###########################
-forecast = client.getForecastWeather(q='07112', days=2)
+    while True:
+        cmd = input("请输入命令或要查询城市名，注意国内城市请输入拼音，国外城市输入英文:")
+        day  = int(input("请问要查询几天后的天气:"))
+        forecast = client.getForecastWeather(q=cmd, days=10)
+        if cmd in ["quit"]:
+            print("程序退出")
+            break
+        elif "error" in forecast:
+            print('输入的城市无效或命令无效')
+        else: 
+            print ("要查询的日期:",forecast['forecast']['forecastday'][day]['date']) 
+            print ("平均气温:",forecast['forecast']['forecastday'][day]['day']['avgtemp_c']) 
+            print ("天气状态:",forecast['forecast']['forecastday'][day]['day']['condition']['text']) 
+
+if __name__ == '__main__':
+    main()
+
+
+
 # "forecast" is a dict with a structure like this:
 '''
 {
@@ -123,6 +95,3 @@ forecast = client.getForecastWeather(q='07112', days=2)
 }
 '''
 
-print (forecast['forecast']['forecastday'][0]['date']) # get date of forecast
-print (forecast['forecast']['forecastday'][0]['day']['avgtemp_c']) # get moonrise time
-print (forecast['forecast']['forecastday'][0]['day']['maxtemp_c'])
